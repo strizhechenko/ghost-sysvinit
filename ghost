@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# chkconfig: 2345 11 88
+
+prog="ghost"
+. /etc/init.d/functions
+
+stop() {
+	killall node
+}
+
+start() {
+	cd /opt/Ghost
+	setsid npm start &>>/var/log/ghost.log & disown -a
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+	start | stop | restart)
+	$1
+	;;
+	*)
+	echo "$1" not supported
+	;;
+esac
