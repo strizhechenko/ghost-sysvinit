@@ -10,7 +10,7 @@ stop() {
 }
 
 start() {
-	cd /opt/Ghost
+	cd /opt/ghost
 	setsid npm start &>>/var/log/ghost.log & disown -a
 }
 
